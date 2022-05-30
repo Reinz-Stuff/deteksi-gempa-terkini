@@ -38,19 +38,29 @@ def ektraksi_data():
 
         for res in result:
             print(i, res)
-            if res == 1:
+            if i == 1:
                 magnitudo = res.text
-            i += 1
+            elif i == 2:
+                kedalaman = res.text
+            elif i == 3:
+                koordinat = res.text.split(' - ')
+                ls = koordinat[0]
+                bt = koordinat[1]
+            elif i == 4:
+                lokasi = res.text
+            elif i == 5:
+                dirasakan = res.text
+            i = i + 1
 
         hasil = dict()
         hasil['tanggal'] = tanggal
         hasil['waktu'] = waktu
         hasil['magnitudo'] = magnitudo
-        hasil['kedalaman'] = '41 km'
-        hasil['koordinat'] = {'lat': 4.61, 'lng': 102.75}
-        hasil['lokasi'] = 'Pusat gempa berada di laut 25 km baratdaya Bengkulu Selatan'
-        hasil['dirasakan'] = 'Dirasakan (Skala MMI): IV Manna, IV Argamakmur,' \
-                             ' IV Lampung Barat,III-IV Kepahiang, III-IV Kota Bengkulu.'
+        hasil['kedalaman'] = kedalaman
+        hasil['koordinat'] = {'ls': ls, 'bt': bt}  # {'lat': 4.61, 'lng': 102.75}
+        hasil['lokasi'] = lokasi  # 'Pusat gempa berada di laut 25 km baratdaya Bengkulu Selatan'
+        hasil['dirasakan'] = dirasakan  # 'Dirasakan (Skala MMI): IV Manna, IV Argamakmur,' \
+        # ' IV Lampung Barat,III-IV Kepahiang, III-IV Kota Bengkulu.'
         return hasil
     else:
         return None
@@ -65,7 +75,7 @@ def tampilkan_data(result):
     print(f"waktu {result['waktu']}")
     print(f"Magnitudo {result['magnitudo']}")
     print(f"Kedalaman {result['kedalaman']}")
-    print(f"koordinat: lat= {result['koordinat']['lat']} lng= {result['koordinat']['lng']}")
+    print(f"koordinat: ls= {result['koordinat']['ls']} bt= {result['koordinat']['bt']}")
     print(f"Lokasi {result['lokasi']}")
     print(f"Dirasakan {result['dirasakan']}")
 
